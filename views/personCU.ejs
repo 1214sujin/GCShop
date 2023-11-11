@@ -1,0 +1,76 @@
+<div class="container">	
+    <h2>사용자 정보 <%if(locals.person){%>수정<%}else{%>입력<%}%></h2>
+	<form name="form" action="/person/<%if(locals.person){%>update<%}else{%>create<%}%>_process" method="post" onsubmit="return confirmForm()" >
+		<%if(locals.person){%><div class="mb-3">
+			<label class="form-label" for="id">아이디</label> 		<!-- blur(): 현재 편집중인 계정의 아이디를 보여주되, 편집할 수 없게 함 -->
+			<input class="form-control" type="text" name="login_id" id="id" value="<%= person[0].loginid %>" style="width:300px;" onfocus="blur()" />
+		</div><%}%>
+		<%if(!locals.person){%><div class="mb-3">
+			<label class="form-label" for="id">아이디</label> 
+			<input class="form-control" type="text" name="login_id" id="id" style="width:300px;" />
+		</div><%}%>
+		<%if(!locals.person){%><div class="mb-3">
+			<label class="form-label" for="pwd">비밀번호</label> 
+			<input class="form-control" type="password" name="password" id="pwd" style="width:300px;" />
+		</div><%}%>
+        <div class="mb-3">
+			<label class="form-label" for="name">이름</label> 
+			<input class="form-control" type="text" name="name" id="name" <%if(locals.person){%>value="<%=person[0].name%>"<%}%> style = "width:300px;" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label" for="add">주소</label> 
+			<input class="form-control" type="text" name="address" id="add" <%if(locals.person){%>value="<%=person[0].address%>"<%}%> style="width:300px;" />
+		</div>
+        <div class="mb-3">
+			<label class="form-label" for="tel">전화번호</label> 
+			<input class="form-control" type="text" name="tel" id="tel" <%if(locals.person){%>value="<%=person[0].tel%>"<%}%> style="width:300px;" />
+		</div>
+        <div class="mb-3">
+			<label class="form-label" for="birth">생년월일</label> 
+			<input class="form-control" type="text" name="birth" id="birth" <%if(locals.person){%>value="<%=person[0].birth%>"<%}%> style="width:300px;" />
+		</div>
+        <div class="mb-3">
+			<label class="form-label" for="cls">접근 등급 (00|01) 
+				<%if(!locals.person){%><span style="color:gray; font-size: smaller;"> 회원 등급 계정의 생성은 회원가입을 이용하세요</span><%}%></label> 
+			<input class="form-control" type="text" name="class" id="cls" <%if(locals.person){%>value="<%=person[0].class%>"<%}%> style="width:300px;" />
+		</div>
+        <%if(locals.person){%><div class="mb-3"> <!--포인트는 샵을 이용하면서 쌓일 것이므로 처음 등록할 때는 0으로 함-->
+			<label class="form-label" for="pnt">포인트</label> 
+			<input class="form-control" type="text" name="point" id="pnt" value="<%=person[0].point%>" style="width:300px;" />
+		</div><%}%>
+        <button class="btn btn-outline-primary btn-sm" type="submit">입력</button>
+  </form>
+
+  <script>
+	function confirmForm() {
+		if (form.login_id.value == '') {
+			alert(`아이디를 입력하지 않았습니다.`)
+			form.login_id.focus()
+			return false
+		}
+		if (form.password) {
+			if (form.password.value == '') {
+				alert(`비밀번호를 입력하지 않았습니다.`)
+				form.login_id.focus()
+				return false
+			}
+		}
+		if (form.name.value == '') {
+			alert(`이름을 입력하지 않았습니다.`)
+			form.name.focus()
+			return false
+		}
+		if (form.class.value != '00' && form.class.value != '01' && form.class.value != '02') {
+			alert(`접근 등급이 잘못 설정되었습니다.`)
+			form.class.focus()
+			return false
+		}
+		if (form.birth.value == '') {
+			alert(`생년월일을 입력하지 않았습니다.`)
+			form.birth.focus()
+			return false
+		}
+		return true
+	}
+  </script>
+</div>

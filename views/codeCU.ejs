@@ -1,0 +1,32 @@
+<div class="container">	
+    <h2>코드 <%if(locals.code){%>수정<%}else{%>입력<%}%></h2>
+	<form action="/code/<%if(locals.code){%>update<%}else{%>create<%}%>_process" method="post" >
+		<%if(locals.main_id){%><input type="hidden" name="main_id" value="<%= main_id %>">
+		<input type="hidden" name="sub_id" value="<%= sub_id %>"><%}%>
+		<%if(!locals.code){%><div class="mb-3">
+			<label class="form-label" for="id">대분류</label> 
+			<input class="form-control" type="text" name="main_id" value="0000" style = "width:300px;" />
+		</div><%}%>
+        <div class="mb-3">
+			<label class="form-label" for="id">대분류명</label> 
+			<input class="form-control" type="text" name="main_name" <%if(locals.code){%>value="<%=code[0].main_name%>"<%}%> style = "width:300px;" />
+		</div>
+        <%if(!locals.code){%><div class="mb-3">
+			<label class="form-label" for="id">소분류</label> 
+			<input class="form-control" type="text" name="sub_id" style="width:300px;" />
+		</div><%}%>
+        <div class="mb-3">
+			<label class="form-label" for="id">소분류명</label> 
+			<input class="form-control" type="text" name="sub_name" <%if(locals.code){%>value="<%=code[0].sub_name%>"<%}%> style="width:300px;" />
+		</div>
+        <div class="mb-3">
+			<label class="form-label" for="id">시작일</label> 
+			<input class="form-control" type="text" name="start" id="start" <%if(locals.code){%>value="<%=code[0].start%>"<%}%> style="width:300px;" />
+		</div>
+        <div class="mb-3">
+			<label class="form-label" for="id">종료일</label> 
+			<input class="form-control" type="text" name="end" id="end" <%if(locals.code){%>value="<%=code[0].end%>"<%}%> style="width:300px;" />
+		</div>
+        <button class="btn btn-outline-primary btn-sm" type="submit">입력</button>
+  </form>
+</div>

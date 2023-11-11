@@ -1,0 +1,17 @@
+<table class="table table-bordered border-primary">
+    <thead>
+        <th>제목</th><th>페이지당 글 수</th><th>설명</th><th>일반 사용자 쓰기 가능 여부</th><th>댓글 가능 여부</th><th colspan="2">메뉴</th>
+    </thead> 
+   
+    <% for (let i=0; i < types.length; i++) { %>
+        <tr><td><%= types[i].title %></td>
+            <td><%= types[i].numPerPage %></td>
+            <td><%= types[i].description %></td>
+            <td><%= types[i].write_YN %></td>
+            <td><%= types[i].re_YN %></td>
+            <td><a href="/board/type/update/<%= types[i].type_id %>">수정</a></td>
+            <td><a href="/board/type/delete/<%= types[i].type_id %>" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a></td>
+        </tr>
+    <% } %>
+
+</table>

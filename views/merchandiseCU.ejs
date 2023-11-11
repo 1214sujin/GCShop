@@ -1,0 +1,59 @@
+<div class="container">	
+	<script>
+
+		function displayFileName(){
+			var fileName = $("#file").val();
+			$(".upload-name").val(fileName);
+		}
+	</script>
+	<h2>상품 <%if(locals.id){%>수정<%}else{%>입력<%}%></h2>
+	<form action="/merchandise/<%if(locals.id){%>update<%}else{%>create<%}%>_process" method="post" enctype="multipart/form-data">
+		<%if(locals.id){%><input type="hidden" name="id" value="<%= id %>"><%}%>
+		<div class="mb-3">
+			<label class="form-label" for="id">카테고리</label>
+			<select name="category" id="id">
+				<% for (let i=0; i<list.length; i++) { %>
+					<% if (locals.mer && list[i].sub_id==mer[0].category) { %>
+						<option value="<%= list[i].sub_id %>" selected><%= list[i].sub_name %></option>
+					<% } else { %>
+						<option value="<%= list[i].sub_id %>"><%= list[i].sub_name %></option>
+					<% } %>
+				<% } %>
+			</select>
+		</div>
+    <div class="mb-3">
+			<label class="form-label" for="name">제품명</label> 
+			<input class="form-control" type="text" name="name" id="name" <%if(locals.mer){%>value="<%=mer[0].name%>"<%}%> style="width:300px;" />
+		</div>
+    <div class="mb-3">
+			<label class="form-label" for="price">가격</label> 
+			<input class="form-control" type="text" name="price" id="price" <%if(locals.mer){%>value="<%=mer[0].price%>"<%}%> style="width:300px;" />
+		</div>
+    <div class="mb-3">
+			<label class="form-label" for="stock">재고</label> 
+			<input class="form-control" type="text" name="stock" id="stock" <%if(locals.mer){%>value="<%=mer[0].stock%>"<%}%> style="width:300px;" />
+		</div>
+    <div class="mb-3">
+			<label class="form-label" for="brand">브랜드</label> 
+			<input class="form-control" type="text" name="brand" id="brand" <%if(locals.mer){%>value="<%=mer[0].brand%>"<%}%> style="width:300px;" />
+		</div>
+    <div class="mb-3">
+			<label class="form-label" for="supplier">공급자</label> 
+			<input class="form-control" type="text" name="supplier" id="supplier" <%if(locals.mer){%>value="<%=mer[0].supplier%>"<%}%> style="width:300px;" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label" for="sale">할인여부 (Y|N)</label> 
+			<input class="form-control" type="text" name="sale_yn" id="sale" <%if(locals.mer){%>value="<%=mer[0].sale_yn%>"<%}%> style="width:300px;" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label" for="sale_price">할인가격</label> 
+			<input class="form-control" type="text" name="sale_price" id="sale_price" <%if(locals.mer){%>value="<%=mer[0].sale_price%>"<%}%> style="width:300px;" />
+		</div>
+
+		<div class="mb-3">
+				<input class="upload-name" value="" name = "image" placeholder="이미지파일">
+				<input type="file" id="file" name="uploadFile" onchange="displayFileName()">
+		</div>
+		<button class="btn btn-outline-primary btn-sm" type="submit">입력</button>
+	</form>
+</div>

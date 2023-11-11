@@ -1,0 +1,22 @@
+<table class="table table-bordered border-primary">
+    <thead>
+        <th>아이디</th><th>이름</th><th>주소</th><th>전화번호</th><th>생년월일</th><th>접근 등급</th><th>포인트</th>
+        <% if (isU) { %><th colspan="2">메뉴</th><% } %>
+    </thead> 
+   
+    <% for (let i=0; i < person.length; i++) { %>
+        <tr><td><%= person[i].loginid %></td>
+            <td><%= person[i].name %></td>
+            <td><%= person[i].address %></td>
+            <td><%= person[i].tel %></td>
+            <td><%= person[i].birth %></td>
+            <td><%= person[i].class %></td>
+            <td><%= person[i].point %></td>
+            <% if (isU) { %>
+                <td><a href="/person/update/<%= person[i].loginid %>">수정</a></td>
+                <td><a href="/person/delete/<%= person[i].loginid %>" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a></td>
+            <% } %>
+        </tr>
+    <% } %>
+
+</table>
