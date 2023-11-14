@@ -1,0 +1,21 @@
+<h2><%= btname.title %></h2>
+<table class="table table-bordered border-primary">
+    <thead>
+        <th>작성자</th><th>제목</th><th>날짜</th>
+    </thead> 
+   
+    <% for (let i=0; i < boards.length; i++) { %>
+        <tr><td><%= boards[i].name %></td>
+            <td><a href="/board/detail/<%=boards[i].board_id%>/<%=page%>" style="text-decoration-line:none"><%= boards[i].title %></a></td>
+            <td><%= boards[i].date %></td>
+        </tr>
+    <% } %>
+
+</table>
+
+<% for (let i=0; i<total; i++) {
+    if (i+1 != page) {%> <a href="/board/view/<%=boards[i].type_id%>/<%=i+1%>" style="text-decoration-line:none"><%= i+1 %> </a><%} else {%><strong> <%= i+1 %> </strong><%}
+} %>
+<% if (write_YN == 'Y') {%>
+    <button type="button" class="btn btn-info me-md-2" style="float: right" onclick="location.href='/board/create/<%=btname.type_id%>'">글쓰기</button>
+<%} %>
