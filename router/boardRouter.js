@@ -29,4 +29,11 @@ router.get('/delete/:boardId/:typeId/:pNum', (req, res) => {
 	board.delete_process(req, res)
 })
 
+router.post('/reply/create_process', (req, res) => {
+	board.reply_create_process(req, res)
+})
+router.post('/reply/delete', (req, res) => {
+	board.reply_delete_process(req, res)
+})
+
 module.exports = router
