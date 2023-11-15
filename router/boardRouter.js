@@ -3,11 +3,11 @@ var router = express.Router()
 
 var board = require('../lib/board')
 
-router.get('view/:typeId/:pNum', (req, res) => {
+router.get('/view/:typeId/:pNum', (req, res) => {
 	board.view(req, res)
 })
 
-router.get('/detail/:boardId/:typeId', (req, res) => {
+router.get('/detail/:boardId/:pNum', (req, res) => {
 	board.detail(req, res)
 })
 

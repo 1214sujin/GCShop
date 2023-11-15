@@ -1,27 +1,42 @@
-<div class="container">	
-	
-    
-    <h2> 생성</h2>
-	<form action="/board/create_process" method="post" >
-        <input type = "hidden" name="type_id" value = "<%=btname[0].type_id%>">
-        <input type = "hidden" name="loginid" value = "<%=loginid%>">
+<div class="container">
+    <% if (cru!='R') {%><h2><%= btname.title %> <% if (cru=='C') {%>작성<%} else {%>수정<%} %></h2><%} %>
+	<form action="/board/<%if(cru=='C'){%>create<%}else{%>update<%}%>_process" method="post" >
+        
+		<% if (cru=='C') {%><input type = "hidden" name="loginid" value="<%=loginid%>">
+							<input type = "hidden" name="type_id" value="<%=btname.type_id%>"><%} %>
+		<% if (cru=='U') {%><input type = "hidden" name="board_id" value="<%=board.board_id%>">
+							<input type = "hidden" name="page" value="<%=page%>"><%} %>
 		<div class="mb-3">
 			<label class="form-label" for="id">제목</label> 
-			<input class="form-control" type="text" name="title" style = "width:300px;" />
+			<input class="form-control" type="text" name="title" style = "width:300px;"
+				<% if (cru=='R') {%>disabled<%} %> <%if (cru!='C') {%>value="<%= board.title %>"<%} %>/>
 		</div>
         <div class="mb-3">
-			<label class="form-label" for="id">작성자</label> 
-			<input class="form-control" type="text" name="title" value = "<%=who%>" style = "width:300px;" disabled/>
-		</div>
-        <div class="mb-3">
+			<label class="form-label" for="id">작성자</label>
+				<input class="form-control" type="text" name="title" value = "<%=who%>" style = "width:300px;" disabled>
+        </div>
+		<div class="mb-3">
 			<label class="form-label" for="id">내용</label> 
-			<textarea class="form-control" name="content" style = "width:800px;height: 200px;" ></textarea>
+			<textarea class="form-control" name="content" style = "width:800px;height: 200px;" <% if (cru=='R') {%>disabled<%} %> ><% if (cru!='C') {%><%= board.content %><%} %></textarea>
 		</div>
-        <div class="mb-3">
-			<label class="form-label" for="id">갱신삭제시 비밀번호</label> 
-			<input class="form-control" type="text" name="password" style = "width:300px;" />
-		</div>
-        <button class="btn btn-outline-primary btn-sm" type="submit">생성</button>
+		<% if (cru!='R' || locals.accessible) {%>
+			<div class="mb-3">
+				<label class="form-label" for="id">갱신삭제시 비밀번호</label> 
+				<input class="form-control" type="text" name="password" style = "width:300px;">
+			</div>
+        	<button class="btn btn-outline-primary btn-sm" type="submit"><% if (cru=='C') {%>생성<%} else {%>수정<%} %></button>
+		<%} %>
     
   </form>
 </div>
+
+<% if (cru=='R') {%>
+	<button type="button" class="btn btn-info me-md-2" style="float: right" 
+	onclick="location.href='/board/view/<%=board.type_id%>/<%=page%>'">목록</button>
+	<% if (locals.accessible) {%>
+		<button type="button" class="btn btn-info me-md-2" style="float: right"
+		onclick="location.href='/board/update/<%=board.board_id%>/<%=board.type_id%>/<%=page%>'">수정</button>
+		<button type="button" class="btn btn-info me-md-2" style="float: right" 
+		onclick="if(confirm('정말로 삭제하시겠습니까?')==false) return false; location.href='/board/delete/<%=board.board_id%>/<%=board.type_id%>/<%=page%>'">삭제</button>
+	<%}
+}%>
