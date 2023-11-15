@@ -4,7 +4,7 @@ var router = express.Router()
 var shop = require('../lib/shop')
 
 router.get('/', (req, res) => {
-	shop.home(req, res)
+	res.redirect('/shop/all')
 })
 
 module.exports = router
