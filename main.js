@@ -7,6 +7,7 @@ app.set('view engine','ejs');
 //사용자 정의 모듈
 var rootRouter = require('./router/rootRouter');
 var shopRouter = require('./router/shopRouter')
+var purchaseRouter = require('./router/purchaseRouter')
 var authRouter = require('./router/authRouter');	//authentication
 var codeRouter = require('./router/codeRouter');
 var personRouter = require('./router/personRouter');
@@ -39,6 +40,7 @@ app.use(bodyParser.urlencoded({extended: false }));
 // 라우터 호출
 app.use('/',rootRouter);
 app.use('/shop',shopRouter)
+app.use('/purchase',purchaseRouter)
 app.use('/auth',authRouter);
 app.use('/code',codeRouter);
 app.use('/person',personRouter);
