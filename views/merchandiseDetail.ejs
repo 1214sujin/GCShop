@@ -1,0 +1,20 @@
+<form id="myform" method="post">
+<table class="table table-bordered">
+	<tr><td rowspan=0><img src="<%= item.image %>" style="width:300px; height:300px" alt="상품 이미지"></td><td><%= item.name %></td></tr>
+	<tr><td>가격: <%= item.price %>원</td></tr>
+	<tr><td>브랜드: <%= item.brand %></td></tr>
+	<% if (locals.loginid) {%>
+		<tr><td>
+			<button class="btn btn-outline-primary btn-sm" type="submit" onclick="submitForm('/shop/perchase_process/<%=item.mer_id%>')">구매</button>
+			<button class="btn btn-outline-primary btn-sm" type="submit" onclick="submitForm('/shop/cart_process/<%=item.mer_id%>')">장바구니</button>
+		</td></tr>
+	<%} %>
+</table>
+</form>
+
+<script>
+	function submitForm(action) {
+		myform.action = action
+		muform.submit()
+	}
+</script>

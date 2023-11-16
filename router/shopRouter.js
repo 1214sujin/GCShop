@@ -11,4 +11,8 @@ router.get('/detail/:merId', (req, res) => {
 	shop.detail(req, res)
 })
 
+router.post('/search', (req, res) => {
+	shop.search(req, res)
+})
+
 module.exports = router

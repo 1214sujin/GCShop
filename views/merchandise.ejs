@@ -9,7 +9,7 @@
 		</tr>
 		
 		<% for (let i=0; i < item.length; i++) { %>
-			<tr><td width="110"><img src="<%= item[i].image %>" style="width:100px; height:100px" alt="상품 이미지"></td>
+			<tr><td width="110"><a href="/shop/detail/<%=item[i].mer_id%>"><img src="<%= item[i].image %>" style="width:100px; height:100px" alt="상품 이미지"></a></td>
 				<td><%= item[i].name %></td>
 				<td>
 					<% if (item[i].sale_yn == 'Y') { %>
