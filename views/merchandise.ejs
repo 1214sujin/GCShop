@@ -5,7 +5,7 @@
 			<th>상품명</th>
 			<th>가격</th>
 			<th>브랜드</th>
-			<% if (isU) { %><th colspan="2">메뉴</th><% } %>
+			<% if (locals.isU) { %><th colspan="2">메뉴</th><% } %>
 		</tr>
 		
 		<% for (let i=0; i < item.length; i++) { %>
@@ -19,7 +19,7 @@
 					<% } %>
 				</td>
 				<td><%= item[i].brand %></td>
-				<% if (isU) { %>
+				<% if (locals.isU) { %>
 					<td><a href="/merchandise/update/<%= item[i].mer_id %>">수정</a></td>
 					<td><a href="/merchandise/delete/<%= item[i].mer_id %>" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a></td>
 				<% } %>
