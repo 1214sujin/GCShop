@@ -13,30 +13,72 @@
 		</div>
         <div class="mb-3">
 			<label class="form-label" for="id">작성자</label>
-				<input class="form-control" type="text" name="title" value = "<%=who%>" style = "width:300px;" disabled>
+				<input class="form-control" type="text" value = "<%=who%>" style = "width:300px;" disabled>
         </div>
 		<div class="mb-3">
 			<label class="form-label" for="id">내용</label> 
-			<textarea class="form-control" name="content" style = "width:800px;height: 200px;" <% if (cru=='R') {%>disabled<%} %> ><% if (cru!='C') {%><%= board.content %><%} %></textarea>
+			<textarea class="form-control" name="content" style = "width:800px;height:200px;" <% if (cru=='R') {%>disabled<%} %> ><% if (cru!='C') {%><%= board.content %><%} %></textarea>
 		</div>
 		<% if (cru!='R' || locals.accessible) {%>
-			<div class="mb-3">
-				<label class="form-label" for="id">갱신삭제시 비밀번호</label> 
-				<input class="form-control" type="text" name="password" style = "width:300px;">
-			</div>
-        	<button class="btn btn-outline-primary btn-sm" type="submit"><% if (cru=='C') {%>생성<%} else {%>수정<%} %></button>
+		<div class="mb-3">
+			<label class="form-label" for="id">갱신삭제시 비밀번호</label> 
+			<input class="form-control" type="text" name="password" style = "width:300px;">
+		</div>
+		<% if (cru!='R') {%><button class="btn btn-outline-primary btn-sm" type="submit"><% if (cru=='C') {%>생성<%} else {%>수정<%} %></button><%} %>
 		<%} %>
     
   </form>
 </div>
+<% if (cru=='R') {%>
+<button type="button" class="btn btn-info me-md-2" style="float: right" 
+onclick="location.href='/board/view/<%=board.type_id%>/<%=page%>'">목록</button>
+<% if (locals.accessible) {%>
+<button type="button" class="btn btn-info me-md-2" style="float: right"
+onclick="location.href='/board/update/<%=board.board_id%>/<%=board.type_id%>/<%=page%>'">수정</button>
+<button type="button" class="btn btn-info me-md-2" style="float: right" 
+onclick="if(confirm('정말로 삭제하시겠습니까?')==false) return false; location.href='/board/delete/<%=board.board_id%>/<%=board.type_id%>/<%=page%>'">삭제</button>
+<%} %>
+<%} %>
+
+<hr style="clear:both; opacity:0">
 
 <% if (cru=='R') {%>
-	<button type="button" class="btn btn-info me-md-2" style="float: right" 
-	onclick="location.href='/board/view/<%=board.type_id%>/<%=page%>'">목록</button>
-	<% if (locals.accessible) {%>
-		<button type="button" class="btn btn-info me-md-2" style="float: right"
-		onclick="location.href='/board/update/<%=board.board_id%>/<%=board.type_id%>/<%=page%>'">수정</button>
-		<button type="button" class="btn btn-info me-md-2" style="float: right" 
-		onclick="if(confirm('정말로 삭제하시겠습니까?')==false) return false; location.href='/board/delete/<%=board.board_id%>/<%=board.type_id%>/<%=page%>'">삭제</button>
-	<%}
-}%>
+	<h5>댓글</h5>
+	<% if (locals.loginid) {%>
+		<form action="/board/reply/create_process" method="post">
+			<input type="hidden" name="p_id" value="<%=board.board_id%>">
+			<input type="hidden" name="type_id" value="<%=board.type_id%>">
+			<input type="hidden" name="loginid" value="<%=loginid%>">
+			<input type="hidden" name="page" value="<%= page %>">
+			<div class="mb-3">
+			<input class="form-control" type="text" value = "<%=login_name%>" style = "width:300px;" disabled>
+			</div>
+			<div class="mb-3">
+			<textarea class="form-control" name="content" style = "width:800px;height:100px;resize:none" ></textarea>
+			</div>
+			<button class="btn btn-outline-primary btn-sm" type="submit">작성</button>
+		</form>
+	<%} %>
+	<hr style="opacity:0">
+	<% if (replies=='') {%>
+		댓글 없음
+	<%} else {%>
+		<% for (let i=0; i<replies.length; i++) {%>
+		<form action="/board/reply/delete" method="post">
+			<div class="mb-3" style="width:800px;display:flex;">
+				<input type="hidden" name="re" value="<%= replies[i].board_id %>">
+				<input type="hidden" name="board_id" value="<%= replies[i].p_id %>">
+				<input type="hidden" name="page" value="<%= page %>">
+				<input class="form-control" type="text" name="title" value = "<%=replies[i].name%>" style = "width:300px;display:inline" disabled>
+				<p style="color:gray;font-size:smaller;position:relative;left:10px;top:15px;"><%= replies[i].date %></p>
+				<% if (locals.loginid && replies[i].loginid==loginid) {%>
+					<button class="btn btn-outline-primary btn-sm" type="submit" style="margin-left:auto;display:inline" onclick="if(confirm('정말로 삭제하시겠습니까?')==false) return false">삭제</button>
+				<%} %>
+			</div>
+			<div class="mb-3">
+			<textarea class="form-control" name="content" style = "width:800px;height:100px;resize:none" disabled><%=replies[i].content%></textarea>
+			</div>
+		</form>
+		<%} %>
+	<%} %>
+<%} %>
