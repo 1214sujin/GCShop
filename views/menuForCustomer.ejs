@@ -59,9 +59,9 @@
       </div>
 
       <nav class="navbar bg-body-tertiary">
-        <button class="btn btn-sm btn-outline-warning me-2" type="button">장바구니</button>
+        <a href="/purchase"><button class="btn btn-sm btn-outline-warning me-2" type="button">장바구니</button></a>
         <% if (!locals.logined) { %>
-          <button class="btn btn-sm btn-outline-warning me-2" type="button">구매내역</button>
+          <a href="/purchase/cart"></a><button class="btn btn-sm btn-outline-warning me-2" type="button">구매내역</button></a>
         <% } %>
       </nav>
 

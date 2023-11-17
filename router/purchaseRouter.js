@@ -9,8 +9,8 @@ router.get('/', (req, res) => {
 router.post('/create', (req, res) => {
 	purchase.create_process(req, res)
 })
-router.get('/delete/:pur_id', (req, res) => {
-	purchase.delete_process(req,res)
+router.get('/cancel/:purId', (req, res) => {
+	purchase.cancel_process(req,res)
 })
 
 router.get('/cart', (req, res) => {

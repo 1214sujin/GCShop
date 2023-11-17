@@ -1,0 +1,20 @@
+<table class="table table-bordered">
+    <thead>
+        <th>상품</th><th>상품명</th><th>단가</th><th>담은 날</th><th>수량</th>
+        <% if (locals.isU) { %><th colspan="2">메뉴</th><% } %>
+    </thead> 
+   
+    <% for (let i=0; i < list.length; i++) { %>
+        <tr><td><img src="<%= list[i].image %>" style="width:100px; height:100px" alt="상품 이미지"></td>
+            <td><%= list[i].name %></td>
+            <td><%= list[i].price-list[i].sale_price %></td>
+            <td><%= list[i].date %></td>
+            <td><label for="qty">수량:</label> <input type="number" name="qty" id="qty"></td>
+            <% if (locals.isU) { %>	<!--관리자-->
+                <td><a href="/purchase/cart/update/<%= list[i].purchase_id %>">수정</a></td>
+                <td><a href="/purchase/cart/delete/<%= list[i].purchase_id %>" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a></td>
+            <% } %>
+        </tr>
+    <% } %>
+
+</table>
