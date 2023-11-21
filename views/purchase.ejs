@@ -1,7 +1,7 @@
 <table class="table table-bordered">
     <thead>
         <th>상품</th><th>상품명</th><th>단가</th><th>구매량</th><th>총 금액</th><th>구매일</th><th>취소 여부</th>
-        <% if (locals.isU) { %><th colspan="2">메뉴</th><% } %>
+        <% if (locals.isU) { %><th>사용자 ID</th><% if (isU=='u') {%><th colspan="2">메뉴</th><%} } %>
     </thead> 
    
     <% for (let i=0; i < list.length; i++) { %>
@@ -17,9 +17,11 @@
                 취소된 상품
             <%} %></td>
             <% if (locals.isU) { %>	<!--관리자-->
-                <td><a href="/purchase/update/<%= list[i].purchase_id %>">수정</a></td>
-                <td><a href="/purchase/delete/<%= list[i].purchase_id %>" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a></td>
-            <% } %>
+                <td><%= list[i].loginid %></td>
+                <% if (isU=='u') {%>
+                <td><a href="/purchase/man/update/<%= list[i].purchase_id %>">수정</a></td>
+                <td><a href="/purchase/man/delete/<%= list[i].purchase_id %>" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a></td>
+            <%} } %>
         </tr>
     <% } %>
 
