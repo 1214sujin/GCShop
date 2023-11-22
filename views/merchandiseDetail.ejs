@@ -12,16 +12,16 @@
 	</td></tr>
 	<tr><td>브랜드: <%= item.brand %></td></tr>
 	<% if (locals.purchase) {%>
-		<tr><td><label for="qty">수량:</label> <input type="number" id="qty" name="qty" value="0"></td></tr>
+		<tr><td><label for="qty">수량:</label> <input class="form-control" style="width:300px;display: inline;" type="number" id="qty" name="qty" value="0"></td></tr>
 	<%} %>
 	<% if (locals.loginid) {%>
 		<tr><td>
 			<% if (locals.purchase) {%>
-				<button class="btn btn-outline-primary btn-sm" type="submit" onclick="submitForm('/purchase/create')">결제</button>
+				<button class="btn btn-outline-primary btn-sm" type="submit" onclick="submitForm('/purchase/create_process')">결제</button>
 			<%} else {%>
 				<button class="btn btn-outline-primary btn-sm" type="submit" onclick="submitForm('/shop/detail/<%=item.mer_id%>')">구매</button>
 			<%} %>
-				<button class="btn btn-outline-primary btn-sm" type="submit" onclick="submitForm('/purchase/cart/create')">장바구니</button>
+				<button class="btn btn-outline-primary btn-sm" type="submit" onclick="submitForm('/purchase/cart/create_process')">장바구니</button>
 		</td></tr>
 	<%} %>
 </table>

@@ -12,15 +12,17 @@
             <td><%= list[i].total %></td>
             <td><%= list[i].date %></td>
             <td><% if (list[i].cancel=='N') {%>
+                <% if (locals.isU) {%>.<%} else {%>
                 <a href="/purchase/cancel/<%=list[i].purchase_id%>" style="text-decoration-line:none" onclick="return confirm('정말로 구매를 취소하시겠습니까?')">구매취소</a>
+                <%} %>
             <%} else {%>
                 취소된 상품
             <%} %></td>
             <% if (locals.isU) { %>	<!--관리자-->
                 <td><%= list[i].loginid %></td>
                 <% if (isU=='u') {%>
-                <td><a href="/purchase/man/update/<%= list[i].purchase_id %>">수정</a></td>
-                <td><a href="/purchase/man/delete/<%= list[i].purchase_id %>" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a></td>
+                <td><a href="/purchase/update/<%= list[i].purchase_id %>">수정</a></td>
+                <td><a href="/purchase/delete/<%= list[i].purchase_id %>" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a></td>
             <%} } %>
         </tr>
     <% } %>
