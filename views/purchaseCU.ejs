@@ -1,0 +1,57 @@
+<div class="container">	
+	<h2>구매내역 <% if (cu=='c') {%>생성<%} else {%>수정<%} %></h2>
+	
+	<form action="/purchase/<%if(cu=='c'){%>create<%}else{%>update<%}%>_process" method="post">
+		<% if (cu=='u') {%>
+			<input type="hidden" name="pur_id" value="<%= item.purchase_id %>">
+		<div class="mb-3">
+			<label class="form-label" for="id">사용자 ID</label>
+			<select class="form-select" name="loginid" id="id" style="width:200px;">
+				<% for (let i=0; i<lgIds.length; i++) { %>
+					<% if (cu=='u' && lgIds[i].loginid==item.loginid) { var s="selected" } else { var s="" } %>
+					<option value="<%= lgIds[i].loginid %>" <%= s %>><%= lgIds[i].loginid %></option>
+				<% } %>
+			</select>
+		</div>
+		<%} %>
+		<div class="mb-3">
+			<label class="form-label" for="mer">상품명</label>
+			<select class="form-select" name="mer_id" id="mer" style="width:300px;">
+				<% for (let i=0; i<items.length; i++) { %>
+					<% if (cu=='u' && items[i].mer_id==item.mer_id) { var s="selected" } else { var s="" } %>
+					<option value="<%= items[i].mer_id %>" <%= s %>><%= items[i].name %></option>
+				<% } %>
+			</select>
+		</div>
+    	<div class="mb-3">
+			<label class="form-label" for="price">단가</label> 
+			<input class="form-control" type="text" name="price" id="price" <%if(cu=='u'){%>value="<%=item.price%>"<%}%> style="width:300px;" />
+		</div>
+    	<div class="mb-3">
+			<label class="form-label" for="qty">구매량</label> 
+			<input class="form-control" type="number" name="qty" id="qty" value="<%if(cu=='u'){%><%=item.qty%><%}else{%>0<%}%>" style="width:300px;" />
+		</div>
+		<% if (cu=='u') {%>
+		<div class="mb-3">
+			<label class="form-label" for="point">포인트</label> 
+			<input class="form-control" type="text" name="point" id="point" value="<%= item.point %>" style="width:300px;" />
+		</div>
+    	<div class="mb-3">
+			<p>결제 여부</p>
+			<label calss="form-check-label"><input calss="form-check-input" type="radio" name="payYN" value="Y" checked> Yes</label> 
+			<label calss="form-check-label"><input calss="form-check-input" type="radio" name="payYN" value="N" <%if(cu=='c'||cu=='u'&&item.payYN=='N'){%>checked<%}%>> No</label>
+		</div>
+    	<div class="mb-3">
+			<p>취소 여부</p>
+			<label calss="form-check-label"><input calss="form-check-input" type="radio" name="cancel" value="Y" checked> Yes</label> 
+			<label calss="form-check-label"><input calss="form-check-input" type="radio" name="cancel" value="N" <%if(cu=='u'&&item.cancel=='N'){%>checked<%}%>> No</label>
+		</div>
+    	<div class="mb-3">
+			<p>환불처리 여부</p>
+			<label calss="form-check-label"><input calss="form-check-input" type="radio" name="refund" value="Y" checked> Yes</label> 
+			<label calss="form-check-label"><input calss="form-check-input" type="radio" name="refund" value="N" <%if(cu=='u'&&item.refund=='N'){%>checked<%}%>> No</label>
+		</div>
+		<%} %>
+		<button class="btn btn-outline-primary btn-sm" type="submit"><% if (cu=='c') {%>입력<%} else {%>수정<%} %></button>
+	</form>
+</div>

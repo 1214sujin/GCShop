@@ -1,15 +1,15 @@
 <table class="table table-bordered">
-	<% if (locals.item) {%>
+	<% if (locals.item && item!='') {%>
 		
 		<tr style='text-align: center'><th>상품 이미지</th>
 			<th>상품명</th>
 			<th>가격</th>
 			<th>브랜드</th>
-			<% if (isU) { %><th colspan="2">메뉴</th><% } %>
+			<% if (locals.isU) { %><th colspan="2">메뉴</th><% } %>
 		</tr>
 		
 		<% for (let i=0; i < item.length; i++) { %>
-			<tr><td width="110"><img src="<%= item[i].image %>" style="width:100px; height:100px" alt="상품 이미지"></td>
+			<tr><td width="110"><a href="/shop/detail/<%=item[i].mer_id%>"><img src="<%= item[i].image %>" style="width:100px; height:100px" alt="상품 이미지"></a></td>
 				<td><%= item[i].name %></td>
 				<td>
 					<% if (item[i].sale_yn == 'Y') { %>
@@ -19,7 +19,7 @@
 					<% } %>
 				</td>
 				<td><%= item[i].brand %></td>
-				<% if (isU) { %>
+				<% if (locals.isU) { %>
 					<td><a href="/merchandise/update/<%= item[i].mer_id %>">수정</a></td>
 					<td><a href="/merchandise/delete/<%= item[i].mer_id %>" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a></td>
 				<% } %>

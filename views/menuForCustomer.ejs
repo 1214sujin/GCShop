@@ -27,8 +27,8 @@
         <!-- 메뉴 끝 -->
 
         <!-- 검색창 시작 -->
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <form class="d-flex" role="search" action="/shop/search">
+          <input class="form-control me-2" type="search" name="kw" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
         <!-- 검색창 끝 -->
@@ -59,9 +59,9 @@
       </div>
 
       <nav class="navbar bg-body-tertiary">
-        <button class="btn btn-sm btn-outline-warning me-2" type="button">장바구니</button>
         <% if (!locals.logined) { %>
-          <button class="btn btn-sm btn-outline-warning me-2" type="button">구매내역</button>
+          <a href="/purchase/cart"><button class="btn btn-sm btn-outline-warning me-2" type="button">장바구니</button></a>
+          <a href="/purchase"><button class="btn btn-sm btn-outline-warning me-2" type="button">구매내역</button></a>
         <% } %>
       </nav>
 

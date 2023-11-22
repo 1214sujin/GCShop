@@ -1,0 +1,28 @@
+<div class="container">	
+	<h2>장바구니 <% if (cu=='c') {%>생성<%} else {%>수정<%} %></h2>
+	
+	<form action="/purchase/cart/<%if(cu=='c'){%>create<%}else{%>update<%}%>_process" method="post">
+		<% if (cu=='u') {%>
+			<input type="hidden" name="cart_id" value="<%= item.cart_id %>">
+		<div class="mb-3">
+			<label class="form-label" for="id">사용자 ID</label>
+			<select class="form-select" name="loginid" id="id" style="width:200px;">
+				<% for (let i=0; i<lgIds.length; i++) { %>
+					<% if (cu=='u' && lgIds[i].loginid==item.loginid) { var s="selected" } else { var s="" } %>
+					<option value="<%= lgIds[i].loginid %>" <%= s %>><%= lgIds[i].loginid %></option>
+				<% } %>
+			</select>
+		</div>
+		<%} %>
+		<div class="mb-3">
+			<label class="form-label" for="mer">상품명</label>
+			<select class="form-select" name="mer_id" id="mer" style="width:300px;">
+				<% for (let i=0; i<items.length; i++) { %>
+					<% if (cu=='u' && items[i].mer_id==item.mer_id) { var s="selected" } else { var s="" } %>
+					<option value="<%= items[i].mer_id %>" <%= s %>><%= items[i].name %></option>
+				<% } %>
+			</select>
+		</div>
+		<button class="btn btn-outline-primary btn-sm" type="submit"><% if (cu=='c') {%>입력<%} else {%>수정<%} %></button>
+	</form>
+</div>
