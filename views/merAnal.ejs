@@ -1,0 +1,37 @@
+<div class="container">	
+	<h2>상품별 판매량 </h2>
+
+	<% var i = 0;
+	   while(i < data.length) { %>
+		<input type = "hidden" value = "<%=data[i].cnt%>" name = "data">
+		<input type = "hidden" value = "<%=data[i].name%>" name = "name">
+	<% i += 1 } %>
+		<input type = "hidden" value = "<%=max%>" name = "max">
+	<canvas id="graph" width="500" height="500" style="background-color: aliceblue"></canvas>
+
+	<script>
+		let data = document.getElementsByName("data");
+		let name = document.getElementsByName("name");
+		let max = document.getElementsByName("max")[0].value;
+		let colors = ["blue", "magenta", "green", "yellow", "red", "black", "white"];
+		let canvas = document.getElementById("graph");
+		let context = canvas.getContext("2d");
+
+		let barWidth = 40;	// 막대 너비
+		let barGap = 20;	// 막대 간격
+
+		for (let i=0; i<data.length; i++) {	//
+			context.font = "20px malgun gothic";
+			context.fillStyle = colors[i];
+			context.fillText(name[i].value + " | " + data[i].value + "개", 20, 35 + 25 * i);
+		}
+
+		let barStart = 150;
+		for (let i=0; i<data.length; i++) {
+			context.fillStyle = colors[i];
+			context.fillRect(barStart, 400 - parseFloat((data[i].value/max)*200), barWidth, parseFloat((data[i].value/max)*200));
+			barStart += barWidth + barGap;
+		}
+	</script>
+</div>
+

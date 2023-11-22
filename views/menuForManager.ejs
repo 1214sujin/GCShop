@@ -18,10 +18,10 @@
 					<a class="nav-link" href="/person/view/v">사용자</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">장바구니</a>
+					<a class="nav-link" href="/purchase/cart/view/v">장바구니</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">구매내역</a>
+					<a class="nav-link" href="/purchase/view/v">구매내역</a>
 				</li>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -55,8 +55,8 @@
 						<li><a class="dropdown-item" href="/code/create">코드</a></li>
 						<li><a class="dropdown-item" href="/merchandise/create">상품</a></li>
 						<li><a class="dropdown-item" href="/person/create">사용자</a></li>
-						<li><a class="dropdown-item" href="#">장바구니</a></li>
-						<li><a class="dropdown-item" href="#">구매내역</a></li>
+						<li><a class="dropdown-item" href="/purchase/cart/create">장바구니</a></li>
+						<li><a class="dropdown-item" href="/purchase/create">구매내역</a></li>
 						<li><hr class="dropdown-divider"></li>
 						<li><a class="dropdown-item" href="/board/type/create">게시판 생성</a></li>
 					</ul>
@@ -69,8 +69,8 @@
 						<li><a class="dropdown-item" href="/code/view/u">코드</a></li>
 						<li><a class="dropdown-item" href="/merchandise/view/u">상품</a></li>
 						<li><a class="dropdown-item" href="/person/view/u">사용자</a></li>
-						<li><a class="dropdown-item" href="#">장바구니</a></li>
-						<li><a class="dropdown-item" href="#">구매내역</a></li>
+						<li><a class="dropdown-item" href="/purchase/cart/view/u">장바구니</a></li>
+						<li><a class="dropdown-item" href="/purchase/view/u">구매내역</a></li>
 						<li><hr class="dropdown-divider"></li>
 						<li><a class="dropdown-item" href="/board/type/view">게시판 수정</a></li>
 					</ul>
@@ -80,8 +80,8 @@
 			<!-- 메뉴 끝 -->
 
 			<!-- 검색창 시작 -->
-			<form class="d-flex" role="search">
-				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+			<form class="d-flex" role="search" action="/shop/search">
+				<input class="form-control me-2" type="search" name="kw" placeholder="Search" aria-label="Search">
 				<button class="btn btn-outline-success" type="submit">Search</button>
 			</form>
 			<!-- 검색창 끝 -->

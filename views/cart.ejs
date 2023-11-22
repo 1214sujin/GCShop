@@ -1,0 +1,28 @@
+<form action="/purchase/create_process" method="post">
+<table class="table table-bordered">
+    <thead>
+        <th>상품</th><th>상품명</th><th>단가</th><th>담은 날</th><% if (!locals.isU) {%><th>수량</th><%} %>
+        <% if (locals.isU) { %><th>사용자 ID</th><% if (isU=='u') {%><th colspan="2">메뉴</th><%} } %>
+    </thead> 
+   
+    <% for (let i=0; i < list.length; i++) { %>
+        <input type="hidden" name="cart_id" value="<%= list[i].cart_id %>">
+        <input type="hidden" name="mer_id" value="<%= list[i].mer_id %>">
+        <input type="hidden" name="price" value="<%= list[i].price-list[i].sale_price %>">
+        <tr><td><img src="<%= list[i].image %>" style="width:100px; height:100px" alt="상품 이미지"></td>
+            <td><%= list[i].name %></td>
+            <td><%= list[i].price-list[i].sale_price %></td>
+            <td><%= list[i].date %></td>
+            <% if (!locals.isU) {%><td><label for="qty">수량:</label> 
+                <input class="form-control" style="width:300px;display: inline;"  type="number" name="qty" id="qty" value="0"></td><%} %>
+            <% if (locals.isU) { %>	<!--관리자-->
+                <td><%= list[i].loginid %></td>
+                <% if (isU=='u') {%>
+                <td><a href="/purchase/cart/update/<%= list[i].cart_id %>">수정</a></td>
+                <td><a href="/purchase/cart/delete/<%= list[i].cart_id %>" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a></td>
+            <%} } %>
+        </tr>
+    <% } %>
+</table>
+<% if (!locals.isU) {%><button type="submit" class="btn btn-outline-primary btn-sm" style="float: right">결제</button><%} %>
+</form>

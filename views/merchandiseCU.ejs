@@ -11,7 +11,7 @@
 		<%if(locals.id){%><input type="hidden" name="id" value="<%= id %>"><%}%>
 		<div class="mb-3">
 			<label class="form-label" for="id">카테고리</label>
-			<select name="category" id="id">
+			<select class="form-select" name="category" id="id" style="width:100px;">
 				<% for (let i=0; i<list.length; i++) { %>
 					<% if (locals.mer && list[i].sub_id==mer[0].category) { %>
 						<option value="<%= list[i].sub_id %>" selected><%= list[i].sub_name %></option>
